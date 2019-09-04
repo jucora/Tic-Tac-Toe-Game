@@ -1,10 +1,11 @@
 module UserInteraction
     def get_rol
         puts "\nWELCOME TO THE TIC TAC TOE GAME"
-        puts "Please enter the name of player 1"
+        puts "Start Game"
+        puts "Enter name of player 1"
         @name_1 = gets.chomp
         @rol = 1
-        puts "Please enter the name of player 2"
+        puts "Enter name of player 2"
         @name_2 = gets.chomp
         puts "==========================="
         puts "\n#{@name_1} VS #{@name_2}"
