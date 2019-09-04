@@ -1,12 +1,13 @@
 module UserInteraction
     def get_rol
         puts "\nWELCOME TO THE TIC TAC TOE GAME"
+        puts "Please enter the name of player 1"
+        @name_1 = gets.chomp
+        @rol = 1
+        puts "Please enter the name of player 2"
+        @name_2 = gets.chomp
         puts "==========================="
-        puts "Which player do you prefer?"
-        puts "1 for X or 2 for O"
-        puts "==========================="
-        @rol = gets.chomp.to_i
-           
+        puts "\n#{@name_1} VS #{@name_2}"
     end
 
     def input_cell
