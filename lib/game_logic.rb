@@ -1,4 +1,5 @@
 require_relative '../bin/main'
+
 include UserInteraction
 #====================================================================
 # This is the class Player and is called every time a new game starts
@@ -167,3 +168,42 @@ class Rules < Player
     
     end  
 end
+
+#=================================================================================
+# This is the class Board and is called every time a player interact with the game
+#=================================================================================
+class Board < Rules 
+    def initialize (board, rol, name_1, name_2)
+        @board = board
+        @rol = rol
+        @name_1 = name_1
+        @name_2 = name_2
+    end
+    def print_board
+        if @rol == 1
+            @name = @name_1
+        elsif @rol == 2
+            @name = @name_2
+        end
+        puts "\n\n\n===== #{@name} is playing! ====="
+        puts "\n #{@board[0]} | #{@board[1]} | #{@board[2]} "
+        puts "-----------"
+        puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
+        puts "-----------"
+        puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
+        input_cell
+        valid_move?
+    end
+    
+    def print_last
+       puts "END OF GAME!"
+        puts "\n #{@board[0]} | #{@board[1]} | #{@board[2]} "
+        puts "-----------"
+        puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
+        puts "-----------"
+        puts " #{@board[6]} | #{@board[7]} | #{@board[8]} " 
+    end
+end
+player = Player.new
+player.validate_rol
+
