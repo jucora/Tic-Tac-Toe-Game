@@ -2,7 +2,7 @@
 
 
 module UserInteraction
-    def self.get_rol
+    def get_rol
         puts "\nWELCOME TO THE TIC TAC TOE GAME"
         puts "Start Game"
         puts "Enter name of player 1"
@@ -14,17 +14,15 @@ module UserInteraction
         puts "\n#{@name_1} VS #{@name_2}"
     end
 
-    UserInteraction.get_rol
 
-    def self.input_cell
+    def input_cell
         @cell = nil
         puts "\nSelect a number in the cell"
         @cell = gets.chomp.to_i
     end
 
-    UserInteraction.input_cell
 
-    def self.again?
+    def again?
         puts "##################"
         puts "\n#PLAY AGAIN? (y/n)"
         puts "##################"
@@ -40,5 +38,5 @@ module UserInteraction
         end
     end
 
-    UserInteraction.again?
 end
+
