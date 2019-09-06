@@ -10,7 +10,7 @@ class Board
     @map = {}
     i = 1
     9.times do
-      @map[i] = '.'
+      @map[i] = i
       i += 1
     end
     @winner = 0
@@ -29,10 +29,14 @@ class Board
 
   def add_map(val, symbol)
     result = false
-    if @map[val] == '.'
-      @map[val] = symbol
-      @plays += 1
-      result = true
+    i = 1
+    9.times do
+      if @map[i] == val 
+        @map[i] = symbol
+        @plays += 1
+        result = true
+      end
+      i += 1
     end
     result
   end
