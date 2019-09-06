@@ -1,5 +1,5 @@
 
-require_relative '../lib/game.rb'
+require_relative '../lib/game_logic.rb'
 
 class Main
   def initialize
