@@ -16,30 +16,31 @@ class Main
     puts "\nSelect O or X for player 1: "
     symbol = gets.chomp
     symbol.capitalize!
-    puts "\nName of player 2: "
-    @name_2 = gets.chomp
     while !game.players.include?symbol
       puts 'Please select O or X :'
       symbol = gets.chomp
       symbol.capitalize!
     end
-    player1 = Player.new(1, symbol)
+    puts "\nName of player 2: "
+    @name_2 = gets.chomp
+    player1 = Player.new(@name_1, 1, symbol)
     return player1
   end
 
   def setPlayer2(player1)
     if player1.symbol == "X"
-      player2 = Player.new(2, 'O')
+      player2 = Player.new(@name_2, 2, 'O')
     else
-      player2 = Player.new(2, 'X')
+      player2 = Player.new(@name_2, 2, 'X')
     end
     return player2;
   end
 
   def option(player, board, game)
     result = false
-    print board.display_board
-    print "\nPlayer #{player.value} options [1-9]: "
+    puts board.display_board
+    puts "\n#{player.name} is playing!"
+    puts "Please select one cell between 1 to 9: "
     move = gets.chomp
     while !game.options.include? move.to_i
       print "\nselect a number from 1 to 9: "
@@ -63,9 +64,9 @@ class Main
   def endGame(game, board)
     print board.display_board
     if board.winner == 1
-      print "\n *****#{@name_1} Wins ***** \n"
+      print "\n ***** #{@name_1.capitalize} Wins ***** \n"
     else board.winner == 2
-      print "\n *****#{@name_2} Wins ***** \n"
+      print "\n ***** #{@name_2.capitalize} Wins ***** \n"
     
     end
 
