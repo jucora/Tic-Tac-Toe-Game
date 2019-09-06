@@ -77,7 +77,10 @@ class Main
       if ans == "y" || ans == "Y"
         return true
       elsif ans == "n" || ans == "N"
-        puts "Adios amigo!"
+        puts "\n\n\nADIOS AMIGO!!"
+        puts "*******************************************"
+        puts "Authors: Asha Abdullahi and Julian Belmonte"
+        puts "*******************************************"
         exit
       else
         puts "Invalid option, please try again!"
