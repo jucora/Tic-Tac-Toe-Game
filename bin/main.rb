@@ -7,6 +7,7 @@ class Main
     @name_2
     @again = false
     @print_board = Board.new
+    @game = Game.new
   end
   
   def setPlayer1(game)
@@ -52,16 +53,8 @@ class Main
       print "\nInvalid Option, select again: "
       move = gets.chomp
     end
-    if player.value == 1
-      game.winner = 1 if game.check_map(move.to_i, player.symbol.to_s)
-    else
-      game.winner = 2 if game.check_map(move.to_i, player.symbol.to_s)
-     
-    end
-    result = true if game.winner != 0
-    result = true if game.plays == 9
-
-    @print_board.display_board if player == 1 && result
+    @game.validate_move player, game, move
+    result = @game.end_game(game, player)
     return result
   end
 

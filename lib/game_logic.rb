@@ -63,4 +63,19 @@ class Game
     end
     win
   end
+  
+  def end_game(game, player)
+    result = true if game.winner != 0
+    result = true if game.plays == 9
+    @print_board.display_board if player == 1 && result
+    return result
+  end
+  
+  def validate_move player, game, move
+    if player.value == 1
+      game.winner = 1 if game.check_map(move.to_i, player.symbol.to_s)
+    else
+      game.winner = 2 if game.check_map(move.to_i, player.symbol.to_s)
+    end
+  end
 end
