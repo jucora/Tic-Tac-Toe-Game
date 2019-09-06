@@ -1,11 +1,12 @@
-
 require_relative '../lib/game_logic.rb'
+require_relative '../lib/board.rb'
 
 class Main
   def initialize
     @name_1
     @name_2
     @again = false
+    @print_board = Board.new
   end
   
   def setPlayer1(game)
@@ -37,9 +38,9 @@ class Main
     return player2;
   end
 
-  def option(player, board, game)
+  def option(player, game)
     result = false
-    puts board.display_board
+    puts @print_board.display_board
     puts "\n#{player.name} is playing!"
     puts "Please select one cell between 1 to 9: "
     move = gets.chomp
@@ -47,35 +48,42 @@ class Main
       print "\nselect a number from 1 to 9: "
       move = gets.chomp
     end
-    while !board.add_map(move.to_i, player.symbol.to_s)
+    while !game.add_map(move.to_i, player.symbol.to_s)
       print "\nInvalid Option, select again: "
       move = gets.chomp
     end
     if player.value == 1
-      board.winner = 1 if board.check_map(move.to_i, player.symbol.to_s)
+      game.winner = 1 if game.check_map(move.to_i, player.symbol.to_s)
     else
-      board.winner = 2 if board.check_map(move.to_i, player.symbol.to_s)
+      game.winner = 2 if game.check_map(move.to_i, player.symbol.to_s)
+     
     end
-    result = true if board.winner != 0
-    result = true if board.plays == 9
-    print board.display_board if player == 1 && result
+    result = true if game.winner != 0
+    result = true if game.plays == 9
+
+    @print_board.display_board if player == 1 && result
     return result
   end
 
-  def endGame(game, board)
-    print board.display_board
-    if board.winner == 1
-      print "\n ***** #{@name_1.capitalize} Wins ***** \n"
-    else board.winner == 2
-      print "\n ***** #{@name_2.capitalize} Wins ***** \n"
+  def endGame(game)
     
+    if game.winner == 1
+      puts @print_board.display_board
+      print "\n ***** #{@name_1.capitalize} Wins ***** \n"
+    elsif game.winner == 2
+      puts @print_board.display_board
+      print "\n ***** #{@name_2.capitalize} Wins ***** \n"
+    else
+      puts @print_board.display_board
+      puts "GAME OVER... No winners this time!"
     end
     
     while @again == false do
       puts "\n Do you want to play again? (y/n) :  "
       ans = gets.chomp
       if ans == "y" || ans == "Y"
-        return true
+        game = Game.new
+        game.start_game
       elsif ans == "n" || ans == "N"
         puts "\n\n\nADIOS AMIGO!!"
         puts "*******************************************"

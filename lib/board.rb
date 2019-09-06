@@ -1,14 +1,24 @@
+require_relative 'game_logic.rb'
 class Board
-    attr_reader :array
-  attr_accessor :space_used
-
+attr_accessor :map
   def initialize
-    @array = [%w[1 2 3], %w[4 5 6], %w[7 8 9]]
-    @space_used = 0
+    $map = []
+    i = 1
+    9.times do
+      $map[i] = i
+      i += 1
+    end
   end
-
-  def register_play(row, column, letter)
-    @array[row][column] = letter
+  
+  def display_board
+    i = 1
+    string = ''
+    3.times do
+      string += "\n #{$map[i]} | #{$map[i + 1]} | #{$map[i + 2]} \n"
+      string += '-----------' if i <= 6
+      i += 3
+    end
+    string
   end
   
 end
