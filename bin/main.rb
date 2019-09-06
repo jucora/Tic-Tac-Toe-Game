@@ -5,6 +5,7 @@ class Main
   def initialize
     @name_1
     @name_2
+    @again = false
   end
   
   def setPlayer1(game)
@@ -13,6 +14,8 @@ class Main
     puts "==================================="
     puts "\nName of player 1: "
     @name_1 = gets.chomp
+    puts "\nName of player 2: "
+    @name_2 = gets.chomp
     puts "\nSelect O or X for player 1: "
     symbol = gets.chomp
     symbol.capitalize!
@@ -21,8 +24,6 @@ class Main
       symbol = gets.chomp
       symbol.capitalize!
     end
-    puts "\nName of player 2: "
-    @name_2 = gets.chomp
     player1 = Player.new(@name_1, 1, symbol)
     return player1
   end
@@ -69,14 +70,19 @@ class Main
       print "\n ***** #{@name_2.capitalize} Wins ***** \n"
     
     end
-
-    puts "\n Do you want to play again? (y/n) :  "
-    ans = gets.chomp
-    if ans == "y" || ans.to_i == "Y"
-      return true
-    elsif ans == "n" || ans.to_i == "N"
-      puts "Adios amigo!"
-      return false
+    
+    while @again == false do
+      puts "\n Do you want to play again? (y/n) :  "
+      ans = gets.chomp
+      if ans == "y" || ans == "Y"
+        return true
+      elsif ans == "n" || ans == "N"
+        puts "Adios amigo!"
+        exit
+      else
+        puts "Invalid option, please try again!"
+        false
+      end
     end
   end
 end
