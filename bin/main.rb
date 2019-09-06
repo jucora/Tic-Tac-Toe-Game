@@ -90,21 +90,5 @@ class Main
   end
 end
 
-main = Main.new
-game = Game.new()
-game.play_again = true
-
-while game.play_again
-  game.play_again = false
-  player1 = main.setPlayer1(game)
-  player2 = main.setPlayer2(player1)
-  board = Board.new()
-  while true
-    break if main.option(player1, board, game)
-    break if main.option(player2, board, game)
-  end
-  if main.endGame(game, board)
-    game.play_again = true
-    board.plays = 0
-  end
-end
+game = Game.new
+game.start_game
