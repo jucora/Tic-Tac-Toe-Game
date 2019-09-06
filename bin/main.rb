@@ -2,12 +2,24 @@
 require_relative '../lib/game.rb'
 
 class Main
+  def initialize
+    @name_1
+    @name_2
+  end
+  
   def setPlayer1(game)
-    print "\nSelect O or X for player 1: "
+    puts "\n================================="
+    puts "* WELCOME TO THE TIC TAC TOE GAME *"
+    puts "==================================="
+    puts "\nName of player 1: "
+    @name_1 = gets.chomp
+    puts "\nSelect O or X for player 1: "
     symbol = gets.chomp
     symbol.capitalize!
+    puts "\nName of player 2: "
+    @name_2 = gets.chomp
     while !game.players.include?symbol
-      print 'Please select O or X :'
+      puts 'Please select O or X :'
       symbol = gets.chomp
       symbol.capitalize!
     end
@@ -51,17 +63,18 @@ class Main
   def endGame(game, board)
     print board.display_board
     if board.winner == 1
-      print "\n ***** player 1 Wins ***** \n"
+      print "\n *****#{@name_1} Wins ***** \n"
     else board.winner == 2
-      print "\n ***** Player 2 Wins ***** \n"
+      print "\n *****#{@name_2} Wins ***** \n"
     
     end
 
-    print "\n To play again enter 1:  "
+    puts "\n Do you want to play again? (y/n) :  "
     ans = gets.chomp
-    if ans.to_i == 1
+    if ans == "y" || ans.to_i == "Y"
       return true
-    else
+    elsif ans == "n" || ans.to_i == "N"
+      puts "Adios amigo!"
       return false
     end
   end
