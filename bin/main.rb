@@ -1,12 +1,10 @@
 require_relative '../lib/game_logic.rb'
-require_relative '../lib/board.rb'
 
 class Main
   def initialize
     @name_1
     @name_2
     @again = false
-    @print_board = Board.new
     @game = Game.new
   end
   
@@ -39,9 +37,9 @@ class Main
     return player2;
   end
 
-  def option(player, game)
+  def option(player, game, board)
     result = false
-    puts @print_board.display_board
+    puts board.display_board
     puts "\n#{player.name} is playing!"
     puts "Please select one cell between 1 to 9: "
     move = gets.chomp
@@ -53,24 +51,26 @@ class Main
       print "\nInvalid Option, select again: "
       move = gets.chomp
     end
-    @game.validate_move player, game, move
+    @game.set_symbol(player, game, move)
     result = @game.end_game(game, player)
     return result
   end
 
-  def endGame(game)
-    
+  def endGame(game, board)
     if game.winner == 1
-      puts @print_board.display_board
+      puts board.display_board
       print "\n ***** #{@name_1.capitalize} Wins ***** \n"
     elsif game.winner == 2
-      puts @print_board.display_board
+      puts board.display_board
       print "\n ***** #{@name_2.capitalize} Wins ***** \n"
     else
-      puts @print_board.display_board
+      puts board.display_board
       puts "GAME OVER... No winners this time!"
     end
+    replay_game
+  end
     
+  def replay_game
     while @again == false do
       puts "\n Do you want to play again? (y/n) :  "
       ans = gets.chomp

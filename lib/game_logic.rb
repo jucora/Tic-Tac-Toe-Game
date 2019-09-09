@@ -3,9 +3,9 @@ require_relative 'board.rb'
 
 
 class Game
-  attr_accessor :play_again, :winner, :plays
+  attr_accessor :play_again, :winner, :plays, :board
   attr_reader :options, :players
-
+  
   def initialize
     @plays = 0
     @wins1 = { 1 => [1, 2, 3], 2 => [4, 5, 6], 3 => [7, 8, 9], 4 => [1, 4, 7] }
@@ -15,6 +15,7 @@ class Game
     @play_again = true
     @options = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     @players = %w[X O]
+    @board = Board.new
   end
   
   def start_game
@@ -25,10 +26,10 @@ class Game
       player2 = main.setPlayer2(player1)
       game = Game.new()
       while true
-        break if main.option(player1, self)
-        break if main.option(player2, self)
+        break if main.option(player1, self, @board)
+        break if main.option(player2, self, @board)
       end
-      if main.endGame(self)
+      if main.endGame(self, @board)
         self.play_again = true
         game.plays = 0
       end
@@ -39,8 +40,8 @@ class Game
     result = false
     i = 1
     9.times do
-      if $map[i] == val
-        $map[i] = symbol
+      if @board.map[i] == val
+        @board.map[i] = symbol
         @plays += 1
         result = true
       end
@@ -55,7 +56,7 @@ class Game
       element.each do |_key, value|
         win = true
         value.each do |i|
-          win = false unless $map[i] == symbol
+          win = false unless @board.map[i] == symbol
         end
         break if win
       end
@@ -67,11 +68,11 @@ class Game
   def end_game(game, player)
     result = true if game.winner != 0
     result = true if game.plays == 9
-    @print_board.display_board if player == 1 && result
+    @board.display_board if player == 1 && result
     return result
   end
   
-  def validate_move player, game, move
+  def set_symbol(player, game, move)
     if player.value == 1
       game.winner = 1 if game.check_map(move.to_i, player.symbol.to_s)
     else
