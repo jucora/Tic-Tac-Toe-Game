@@ -1,23 +1,19 @@
 require_relative '../lib/player'
 
-julian = Player.new('julian')
-
 RSpec.describe Player do
-  context 'check player objects can receive name, icon and bet_amount'do
-
-    it 'ensures object can receive a name' do
-        julian.name = 'fish'
-      expect(julian.name).to eq 'fish'
+  let(:player){Player.new('fish', 1, "X")}
+  
+  describe 'Attributes :name, :icon and :symbol are readable'do
+    it 'can read :name attribute' do
+      expect(player.name).to eq ('fish')
+    end
+    
+    it 'can read :value attribute' do
+        expect(player.value).to eq(1)
     end
 
-    it 'ensures object can receive a icon' do
-        julian.icon = 'X'
-        expect(jullian.icon).to eq 'X'
+    it 'can read :symbol attribute' do
+        expect(player.symbol).to eq('X')
     end
-
-
-
   end
-
-
 end
